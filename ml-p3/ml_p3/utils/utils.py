@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from itertools import product
+import os
 
 import pickle
 
@@ -13,10 +14,30 @@ import pickle
 def prepare_cell_data(dataset_numbers, columns=None, verbose=True):
     train_features_list = []
     train_targets_list = []
+    script_dir = os.path.dirname(__file__)
 
     for i in dataset_numbers:
-        classifications_file = rf"C:\Users\javid.rezai\CSMaster\fys-stk4155\ml\miniature-octo-waddle\ml-p3\tests\data\classification\classifications{i}.npy"
-        masks_file = rf"C:\Users\javid.rezai\CSMaster\fys-stk4155\ml\miniature-octo-waddle\ml-p3\tests\data\classification\combined_mean_image{i}_seg.npy"
+
+        classifications_file = os.path.join(
+            script_dir,
+            "..",
+            "..",
+            "tests",
+            "data",
+            "classification",
+            f"classifications{i}.npy",
+        )
+        masks_file = os.path.join(
+            script_dir,
+            "..",
+            "..",
+            "tests",
+            "data",
+            "classification",
+            f"combined_mean_image{i}_seg.npy",
+        )
+        classifications_file = os.path.normpath(classifications_file)
+        masks_file = os.path.normpath(masks_file)
 
         masks = np.load(masks_file, allow_pickle=True).item()["masks"]
         classifications = np.load(classifications_file, allow_pickle=True).item()[
