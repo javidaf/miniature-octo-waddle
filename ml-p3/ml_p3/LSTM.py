@@ -5,6 +5,8 @@ from ml_p2.neural_network.base import BaseNeuralNetwork
 from ml_p2.neural_network.activations import Activation
 from ml_p3.optimizer import AdamLSTM
 from ml_p2.neural_network.initializers import Initializer
+import os
+from ml_p3.utils.utils import prepare_eth_data
 
 
 class LSTMNetwork(BaseNeuralNetwork):
@@ -307,15 +309,12 @@ def main():
 
     # X_train: (batch_size, seq_len, input_dim)
     # y_train: (batch_size, future_steps, output_dim)
-    from ml_p3.utils.utils import prepare_eth_data
-
-    data_file_path = r"ml-p3\tests\data\ETHUSD_1m_Binance.csv"
-    X_train, Y_train, X_test, Y_test, df_resampled, scale = prepare_eth_data(
-        data_file_path,
-        lookback=lookback,
-        horizon=future_steps,
-        freq="D",  # daily aggregation
-        split_ratio=0.8,
+    script_dir = os.path.dirname(__file__)
+    data_file_path = os.path.join(
+        script_dir, "..", "tests", "data", "resampled_eth_data.csv"
+    )
+    X_train, Y_train, X_test, Y_test, _ = prepare_eth_data(
+        data_file_path, lookback=lookback, horizon=future_steps
     )
 
     model.train(X_train, Y_train, epochs=50, batch_size=32)

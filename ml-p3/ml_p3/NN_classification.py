@@ -3,6 +3,7 @@ import numpy as np
 from astroglial_analysis.classifier2 import visualize_classifications
 
 import matplotlib.pyplot as plt
+import os
 
 
 def predict_and_visualize(model, data_set, mask_file, classification_file):
@@ -43,15 +44,31 @@ def predict_and_visualize(model, data_set, mask_file, classification_file):
 
 def NN_classification():
 
-    model_path = r"ml-p3\ml_p3\models\he_relu_8_reg.pkl"
-    model = load_neural_network(model_path)
     data_set = [2]
-    mask_file = r"C:\Users\javid.rezai\CSMaster\fys-stk4155\ml\miniature-octo-waddle\ml-p3\tests\data\classification\combined_mean_image{}_seg.npy".format(
-        data_set[0]
+    script_dir = os.path.dirname(__file__)
+    model_path = os.path.join(script_dir, "models", "he_relu_8_reg.pkl")
+    model_path = os.path.normpath(model_path)
+    model = load_neural_network(model_path)
+
+    mask_file = os.path.join(
+        script_dir,
+        "..",
+        "tests",
+        "data",
+        "classification",
+        f"combined_mean_image{data_set[0]}_seg.npy",
     )
-    test_classifications_file = r"C:\Users\javid.rezai\CSMaster\fys-stk4155\ml\miniature-octo-waddle\ml-p3\tests\data\classification\classifications{}.npy".format(
-        data_set[0]
+    mask_file = os.path.normpath(mask_file)
+
+    test_classifications_file = os.path.join(
+        script_dir,
+        "..",
+        "tests",
+        "data",
+        "classification",
+        f"classifications{data_set[0]}.npy",
     )
+
     predict_and_visualize(model, data_set, mask_file, test_classifications_file)
     plt.show()
 

@@ -1,13 +1,13 @@
 from ml_p3.LSTM import LSTMNetwork
 from ml_p3.kerasLSTM import build_model, evaluate_model, prepare_data_for_keras
 from ml_p3.optimizer import AdamLSTM
-from sklearn.model_selection import train_test_split
+from ml_p3.utils.utils import prepare_eth_data
+import itertools
 
 
 def grid_search_lstm(
     data_file_path, param_grid, epochs=50, batch_size=32, learning_rate=0.01
 ):
-    import itertools
 
     results = []
     param_names = list(param_grid.keys())
@@ -19,7 +19,6 @@ def grid_search_lstm(
         lookback = params["lookback"]
         hidden_dim = params["hidden_dim"]
         print(f"Training with parameters: {params}")
-        from ml_p3.utils.utils import prepare_eth_data
 
         X_train, Y_train, X_test, Y_test, df_resampled, scaler = prepare_eth_data(
             csv_file=data_file_path,
@@ -49,7 +48,6 @@ def grid_search_lstm(
 
 
 def grid_search_keras_lstm(data_file_path, param_grid, epochs=50, batch_size=32):
-    import itertools
 
     results = []
     param_names = list(param_grid.keys())
@@ -61,8 +59,6 @@ def grid_search_keras_lstm(data_file_path, param_grid, epochs=50, batch_size=32)
         lookback = params["lookback"]
         hidden_dim = params["hidden_dim"]
         print(f"Training with parameters: {params}")
-
-        from ml_p3.utils.utils import prepare_eth_data
 
         X_train, Y_train, X_test, Y_test, _, _ = prepare_eth_data(
             csv_file=data_file_path,

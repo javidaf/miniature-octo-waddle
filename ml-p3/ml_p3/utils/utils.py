@@ -5,7 +5,7 @@ from ml_p2.neural_network import NeuralNetwork
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-
+from itertools import product
 
 import pickle
 
@@ -90,8 +90,6 @@ def grid_search_nn(
     search_params = search_params or {}
     param_names = list(search_params.keys())
     param_values = list(search_params.values())
-
-    from itertools import product
 
     for params in product(*param_values):
         current_params = default_params.copy()
@@ -221,3 +219,26 @@ def prepare_eth_data(csv_file, lookback=50, horizon=1, freq="D", split_ratio=0.8
 
     return X_train, Y_train, X_test, Y_test, df_resampled, scaler
 
+
+def load_lstm_model(filepath, LSTMNetwork):
+    """Load a saved LSTMNetwork model from a pickle file."""
+    with open(filepath, "rb") as f:
+        model_state = pickle.load(f)
+
+    optimizer = model_state["optimizer"]
+    model = LSTMNetwork(
+        input_dim=model_state["input_dim"],
+        hidden_dim=model_state["hidden_dim"],
+        output_dim=model_state["output_dim"],
+        future_steps=model_state["future_steps"],
+        optimizer=optimizer,
+        initializer=model_state["initializer"],
+    )
+
+    model.W = model_state["W"]
+    model.U = model_state["U"]
+    model.b = model_state["b"]
+    model.Wy = model_state["Wy"]
+    model.by = model_state["by"]
+
+    return model

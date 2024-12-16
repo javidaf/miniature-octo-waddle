@@ -4,6 +4,8 @@ from keras.api.layers import LSTM, Dense
 from keras.api.optimizers import Adam
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import matplotlib.pyplot as plt
+import os
+from ml_p3.utils.utils import prepare_eth_data
 
 
 def prepare_data_for_keras(Y_train, Y_test):
@@ -60,17 +62,20 @@ def plot_predictions(Y_true, Y_pred):
 
 
 def main():
-    data_file_path = r"ml-p3\tests\data\ETHUSD_1m_Binance.csv"
+    script_dir = os.path.dirname(__file__)
+    data_file_path = os.path.join(
+        script_dir, "..", "tests", "data", "resampled_eth_data.csv"
+    )
+    data_file_path = os.path.normpath(data_file_path)
     lookback = 1
     future_steps = 1
     hidden_dim = 16
     output_dim = 1
     epochs = 50
     batch_size = 32
-    from ml_p3.utils.utils import prepare_eth_data
 
     X_train, Y_train, X_test, Y_test, _, _ = prepare_eth_data(
-        data_file_path, lookback, future_steps, "D", 0.8
+        data_file_path, lookback=lookback, horizon=future_steps
     )
 
     Y_train, Y_test = prepare_data_for_keras(Y_train, Y_test)
@@ -86,6 +91,7 @@ def main():
     Y_test_pred, _ = evaluate_model(model, X_test, Y_test, data_type="Testing")
 
     plot_predictions(Y_test, Y_test_pred)
+    model.save("keras_lstm.keras")
 
 
 if __name__ == "__main__":
