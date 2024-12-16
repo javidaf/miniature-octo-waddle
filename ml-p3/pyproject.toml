@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ml-p3"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.9.20"
+matplotlib = "^3.9"
+scikit-learn = "^1.5.2"
+pandas = "^2.2.3"
+tensorflow = "2.18.0"
+tensorflow-io-gcs-filesystem = "0.31.0"
+tensorflow-intel = "2.18.0"
+notebook = "^7.2.2"
+astroglial-analysis = {git = "https://github.com/yaksilab/silver-dollop.git"}
+ml-p2 = {git = "https://github.com/javidaf/expert-machine.git", rev = "multi-classification", subdirectory = "ml-p2"}
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
