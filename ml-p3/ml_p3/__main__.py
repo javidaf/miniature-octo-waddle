@@ -10,9 +10,7 @@ from ml_p3.NN_classification import NN_classification
 
 def get_paths():
     script_dir = os.path.dirname(__file__)
-    data_path = os.path.join(
-        script_dir, "..", "tests", "data", "resampled_eth_data.csv"
-    )
+    data_path = os.path.join(script_dir, "data", "resampled_eth_data.csv")
     lstm_model_path = os.path.normpath(
         os.path.join(script_dir, "models", "custom_lstm.pkl")
     )

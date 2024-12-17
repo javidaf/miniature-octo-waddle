@@ -310,9 +310,7 @@ def main():
     # X_train: (batch_size, seq_len, input_dim)
     # y_train: (batch_size, future_steps, output_dim)
     script_dir = os.path.dirname(__file__)
-    data_file_path = os.path.join(
-        script_dir, "..", "tests", "data", "resampled_eth_data.csv"
-    )
+    data_file_path = os.path.join(script_dir, "data", "resampled_eth_data.csv")
     X_train, Y_train, X_test, Y_test, _ = prepare_eth_data(
         data_file_path, lookback=lookback, horizon=future_steps
     )

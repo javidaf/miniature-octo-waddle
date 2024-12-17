@@ -63,9 +63,7 @@ def plot_predictions(Y_true, Y_pred):
 
 def main():
     script_dir = os.path.dirname(__file__)
-    data_file_path = os.path.join(
-        script_dir, "..", "tests", "data", "resampled_eth_data.csv"
-    )
+    data_file_path = os.path.join(script_dir, "data", "resampled_eth_data.csv")
     data_file_path = os.path.normpath(data_file_path)
     lookback = 1
     future_steps = 1

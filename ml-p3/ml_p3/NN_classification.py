@@ -44,7 +44,7 @@ def predict_and_visualize(model, data_set, mask_file, classification_file):
 
 def NN_classification():
 
-    data_set = [2]
+    data_set = [5]
     script_dir = os.path.dirname(__file__)
     model_path = os.path.join(script_dir, "models", "he_relu_8_reg.pkl")
     model_path = os.path.normpath(model_path)
@@ -52,8 +52,6 @@ def NN_classification():
 
     mask_file = os.path.join(
         script_dir,
-        "..",
-        "tests",
         "data",
         "classification",
         f"combined_mean_image{data_set[0]}_seg.npy",
@@ -62,8 +60,6 @@ def NN_classification():
 
     test_classifications_file = os.path.join(
         script_dir,
-        "..",
-        "tests",
         "data",
         "classification",
         f"classifications{data_set[0]}.npy",

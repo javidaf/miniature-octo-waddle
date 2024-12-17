@@ -21,8 +21,6 @@ def prepare_cell_data(dataset_numbers, columns=None, verbose=True):
         classifications_file = os.path.join(
             script_dir,
             "..",
-            "..",
-            "tests",
             "data",
             "classification",
             f"classifications{i}.npy",
@@ -30,8 +28,6 @@ def prepare_cell_data(dataset_numbers, columns=None, verbose=True):
         masks_file = os.path.join(
             script_dir,
             "..",
-            "..",
-            "tests",
             "data",
             "classification",
             f"combined_mean_image{i}_seg.npy",
