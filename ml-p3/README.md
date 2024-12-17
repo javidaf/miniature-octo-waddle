@@ -25,7 +25,7 @@ conda create -n p3 python= 3.9.20
 conda activate p3
 ```
 
-3. Install the package
+3. Install the package **It takes a while**
 ```bash
 pip install git+https://github.com/javidaf/miniature-octo-waddle.git@master#subdirectory=ml-p3
 ```
