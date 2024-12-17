@@ -64,3 +64,31 @@ def plot_grid_search_heatmap(
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.show()
+
+
+def visualize_classifications(masks, classifications, title=""):
+
+    legend_elements = [
+        plt.scatter([], [], c="red", s=50, label="Cell Bodies"),
+        plt.scatter([], [], c="blue", s=50, label="Orphan Processes"),
+        plt.scatter([], [], c="green", s=50, label="Complete Cells"),
+    ]
+
+    for classification, label in classifications:
+        if classification == 1:
+            color = "red"
+        elif classification == 2:
+            color = "blue"
+        else:
+            color = "green"
+
+        region = np.where(masks == label)
+        region = np.array(region).T
+        plt.scatter(region[:, 1], region[:, 0], s=1, c=color)
+        # Add label text near the center of each region
+        center_y = np.mean(region[:, 0])
+        center_x = np.mean(region[:, 1])
+        plt.text(center_x, center_y, str(label), fontsize=8, ha="center", va="center")
+
+    plt.title(title)
+    plt.legend(handles=legend_elements, loc="upper right")

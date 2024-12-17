@@ -1,6 +1,6 @@
 from ml_p3.utils.utils import prepare_cell_data, load_neural_network
 import numpy as np
-from astroglial_analysis.classifier2 import visualize_classifications
+from ml_p3.plotting import visualize_classifications
 
 import matplotlib.pyplot as plt
 import os
