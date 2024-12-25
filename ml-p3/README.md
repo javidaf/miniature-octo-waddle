@@ -1,7 +1,7 @@
 # Project 3 - FYS-STK4155
 ---
 
-You can explore the results from the project by exploring the [notebooks](notebooks). There are two notebook, one for the [cell classification](notebooks/NN_cell_classification.ipynb) and one for the [LSTM](notebooks/LSTM.ipynb).
+You can explore the results from the project by exploring the [notebooks](notebooks). There are two notebook, one for the [cell classification](notebooks/NN_classifier.ipynb) and one for the [LSTM](notebooks/LSTM.ipynb).
 
 ![cell_classification](assets/cell_classification.png)
 ![LSTM](assets/lstm.png)
